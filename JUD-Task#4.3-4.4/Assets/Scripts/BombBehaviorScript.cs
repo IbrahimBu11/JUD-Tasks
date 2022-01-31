@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class BombBehaviorScript : MonoBehaviour
 {
-    private float lifeTime = 3;
+    public enum BombState {OnPlayer, IsThrown};
 
-    private float explosionForce = 300f;
+    public BombState bombState = BombState.OnPlayer;
+
+    private float lifeTime = 2;
+
+    private float explosionForce = 200f;
     public Rigidbody rb;
 
-    private float radius = 2.0F;
+    private float radius = 1.0F;
     private float throwPower = 5F;
 
     public GameObject Explosion;
+    private bool alreadyThrown = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +25,14 @@ public class BombBehaviorScript : MonoBehaviour
         StartCoroutine(WaitForTime(lifeTime));
         Explosion = transform.GetChild(1).gameObject;
         rb.AddForce(transform.forward * throwPower, ForceMode.Impulse);
-
+    }
+    private void Update()
+    {
+       // if (bombState == BombState.IsThrown && !alreadyThrown) 
+       // { 
+            
+        //    alreadyThrown = true;
+      //  }
     }
     IEnumerator WaitForTime(float time)
     {
@@ -38,15 +50,14 @@ public class BombBehaviorScript : MonoBehaviour
         {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
-            if (rb != null)
+            if (rb != null) { 
                 rb.AddExplosionForce(explosionForce, explosionPos, radius, 1.0F);
-           
-        }
-    }
+            if(rb.gameObject.name == "Player")
+            {
+                    rb.gameObject.GetComponent<PlayerController>().health -= 2;
+            }
+            }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
     }
 }

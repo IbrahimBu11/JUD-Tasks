@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 38872310486356406}
   - component: {fileID: 4775631925059802989}
   - component: {fileID: -6369281247700424577}
+  - component: {fileID: -1452192867498667750}
   - component: {fileID: 453567134170500070}
   m_Layer: 0
   m_Name: Sticky
-  m_TagString: Untagged
+  m_TagString: bombs
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,12 +107,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4060727866007509736}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 170e20dcedac04742810923c1b30babb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 5
+  bombState: 0
+  rb: {fileID: 0}
+  Explosion: {fileID: 0}
+--- !u!114 &-1452192867498667750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4060727866007509736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b8c5d5552a83246888fed4022f2127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bombState: 0
   rb: {fileID: 0}
   Explosion: {fileID: 0}
 --- !u!54 &453567134170500070

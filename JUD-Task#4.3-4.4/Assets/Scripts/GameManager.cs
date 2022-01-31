@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject enemy;
 
-    public float timeBetweenWaves = 5f;
-    public float countDown = 2f;
+    public float timeBetweenWaves = 2f;
+    public float countDown = 1f;
     public float searchCountdown = 1f;
 
     //public float searchCountdown = 1f; 
@@ -20,9 +20,19 @@ public class GameManager : MonoBehaviour
     public List<GameObject> enemies = new List<GameObject>();
     private int waveIndex = 0;
 
+    public GameObject[] Powerups;
+    private float PowerUpSpawnDelay = 5f;
+    private float TimeBetweetPowerUpSpwns = 3f;
+
     private void Start()
     {
         StartCoroutine(RunSpawner());
+        InvokeRepeating("SpawnPowerUps", PowerUpSpawnDelay, timeBetweenWaves);
+    }
+    void SpawnPowerUps()
+    {
+        int random = Random.Range(0, Powerups.Length);
+        Instantiate(Powerups[random], spawnPositions[Random.Range(0, spawnPositions.Length)].position, Powerups[random].transform.rotation);
     }
 
     // this replaces your Update method
@@ -46,7 +56,7 @@ public class GameManager : MonoBehaviour
 
             state = SpawnState.COUNTING;
     
-        // wait 5 seconds
+        // wait 2 seconds
             yield return new WaitForSeconds(timeBetweenWaves);
         }
     }
