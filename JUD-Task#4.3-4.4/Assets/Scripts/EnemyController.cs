@@ -31,6 +31,9 @@ public class EnemyController : MonoBehaviour
     private Rigidbody rb;
     private Transform bestTarget = null;
 
+    //---------------------------------DAMAGE VARIABLES----------------------------------------//
+    private int damage = 2;
+
     
     
 
@@ -59,12 +62,17 @@ public class EnemyController : MonoBehaviour
         }
         
     }
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Players"))
+        if (collision.gameObject.CompareTag("Players") && collision.gameObject.name != "Player")
         {
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.back * 2f, ForceMode.Impulse);
+            Dodamage(collision.gameObject);
+            rb.AddExplosionForce(1, transform.position, 1);
         }
+    }
+    void Dodamage(GameObject go)
+    {
+        go.GetComponent<PlayerHealth>().ReduceHealth(damage);
     }
     void Update()
     {
@@ -87,7 +95,7 @@ public class EnemyController : MonoBehaviour
     }
     void DetermineStatenPosition()
     {
-        if (transform.position.y < -5)
+        if (transform.position.y < -1)
             Destroy(gameObject);
 
         if (Vector3.Distance(transform.position, bestTarget.position) < minimumPlayerDistance) 

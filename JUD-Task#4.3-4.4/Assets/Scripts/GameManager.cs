@@ -38,25 +38,25 @@ public class GameManager : MonoBehaviour
     // this replaces your Update method
     private IEnumerator RunSpawner()
     {
-        // first time wait 2 seconds
+        
         yield return new WaitForSeconds(countDown);
 
-        // run this routine infinite
+      
         while (true)
         {
             state = SpawnState.SPAWNING;
 
-            // do the spawning and at the same time wait until it's finished
+            
             yield return SpawnWave();
 
             state = SpawnState.WAITING;
 
-            // wait until all enemies died (are destroyed)
+           
             yield return new WaitWhile(EnemyisAlive);
 
             state = SpawnState.COUNTING;
     
-        // wait 2 seconds
+        
             yield return new WaitForSeconds(timeBetweenWaves);
         }
     }

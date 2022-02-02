@@ -160,8 +160,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  positionState: 0
   Balls: []
   BallsTransform: []
   shootPosition: {fileID: 1703343974796308320}
   bomb: {fileID: 4060727866007509736, guid: febfe7ccba1ea434eb36d2326c9afbda, type: 3}
   Speed: 200
+--- !u!114 &8872947569615644665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908409657754329988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbc903b488ccc3b47a6b7724d443f6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingHealth: 10
+  health: 0

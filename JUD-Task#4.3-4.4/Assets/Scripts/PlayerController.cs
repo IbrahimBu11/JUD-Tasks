@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public Text livesUI;
     public GameObject RestartUI;
     public Vector3 startpos;
+    private int damage = 2;
 
 
     // Start is called before the first frame update
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         healthUI.value = health;
         handleLives();
-        if(transform.position.y < -5)
+        if(transform.position.y < -1)
         {
             transform.position = startpos;
             Lives -= 1;
@@ -81,9 +82,9 @@ public class PlayerController : MonoBehaviour
 
 
 
-        Move(movementDirection);
-        Rotation(movementDirection);
-        Jump();
+      //  Move(movementDirection);
+      //  Rotation(movementDirection);
+      //  Jump();
         Shoot();
 
         if (health <= 0)
@@ -199,10 +200,25 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Players"))
         {
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.back * 10f, ForceMode.Impulse);
+            Dodamage(collision.gameObject);
+            // collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.back * 10f, ForceMode.Impulse);
         }
-       
-        
+        if (collision.gameObject.CompareTag("MultibombPowerUp"))
+        {
+            StartCoroutine(hasMultibombs());
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("StickyBombPowerUp"))
+        {
+            StartCoroutine(HasStickyBombPowerUp());
+            Destroy(collision.gameObject);
+        }
+
+
+    }
+    void Dodamage(GameObject go)
+    {
+        go.GetComponent<PlayerHealth>().ReduceHealth(damage);
     }
     private void OnCollisionStay(Collision collision)
     {
@@ -234,7 +250,8 @@ public class PlayerController : MonoBehaviour
         // Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         // controller.Move(move * Time.deltaTime * playerSpeed);
 
-        transform.Translate(moveDirection * playerSpeed * Time.deltaTime, Space.World);
+        //transform.Translate(moveDirection * playerSpeed * Time.deltaTime, Space.World);
+        controller.Move(moveDirection * playerSpeed * Time.deltaTime);
         //if (move != Vector3.zero)
         //{
         //    gameObject.transform.forward = move;
