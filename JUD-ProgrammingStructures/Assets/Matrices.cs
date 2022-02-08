@@ -145,15 +145,15 @@ public class Matrices : MonoBehaviour
             matrix[i, colToBeSwappedWith] = tempCol[i];
         }
     }
-    
-    int[,] AddMatrices(int[,] matrix1, int[,]matrix2)
+
+    List<List<int>> AddMatrices(List<List<int>> matrixListTobeAdded)
     {
-        int[,] tempMatrix = new int[matrix1.GetLength(0),matrix1.GetLength(1)];
-        for(int i = 0; i < matrix1.GetLength(0); i++)
+        List<List<int>> tempMatrix = new List<List<int>>();
+        for(int i = 0; i < numOfRows; i++)
         {
-            for (int j = 0; j < matrix1.GetLength(0); j++)
+            for (int j = 0; j < numbOfColoumns; j++)
             {
-                tempMatrix[i,j] = matrix1[i, j] + matrix2[i, j];
+                tempMatrix[i][j] = matrixList[i][j] + matrixListTobeAdded[i][j];
             }
         }
         return tempMatrix;
@@ -189,10 +189,10 @@ public class Matrices : MonoBehaviour
 
 
       //  MakeaMatrixList(5, 6);
-      ////  Debug.Log(matrixList.Count.ToString() + matrixList[0].Count.ToString());
-      //  //MakeaMatrixList(3, 3);
+      //  Debug.Log(matrixList.Count.ToString() + matrixList[0].Count.ToString());
+      //  MakeaMatrixList(3, 3);
       //  PrintMatrixList(matrixList);
-      // // SetAllElement(4);
+      //  SetAllElement(4);
        // matrix1 = matrix;
         //matrix = AddMatrices(matrix, matrix1);      
         //matrix = SubtractMatrices(matrix, matrix1);      
