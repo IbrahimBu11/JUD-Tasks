@@ -113,8 +113,7 @@ public class PlayerController : MonoBehaviour
     void ReduceHealth()
     {
         health -= 1;
-        
-        
+       
     }
     void Shoot()
     {
@@ -158,17 +157,17 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(3);
         canThrow = true;
     }
-    void Rotation(Vector3 moveDirection)
-    {
-       // transform.rotation *= Quaternion.Euler(0f, horizontal * Time.deltaTime * RotateSpeed, 0f);
-       // transform.rotation = Quaternion.LookRotation(rb.velocity);
+    //void Rotation(Vector3 moveDirection)
+    //{
+    //   // transform.rotation *= Quaternion.Euler(0f, horizontal * Time.deltaTime * RotateSpeed, 0f);
+    //   // transform.rotation = Quaternion.LookRotation(rb.velocity);
 
-        if (moveDirection != Vector3.zero)
-        {
-            //transform.forward = Vector3.Lerp(transform.position,moveDirection,Time.deltaTime * RotateSpeed );
-            transform.forward = moveDirection;
-        }
-    }
+    //    if (moveDirection != Vector3.zero)
+    //    {
+    //        //transform.forward = Vector3.Lerp(transform.position,moveDirection,Time.deltaTime * RotateSpeed );
+    //        transform.forward = moveDirection;
+    //    }
+    //}
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("MultibombPowerUp"))
