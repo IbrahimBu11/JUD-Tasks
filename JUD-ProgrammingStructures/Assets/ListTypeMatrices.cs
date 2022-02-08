@@ -233,6 +233,29 @@ public class ListTypeMatrices : MonoBehaviour
         return isSame;
     }
 
+    float[] GetRow(int rowIndex)
+    {
+        float[] tempFloat = new float[numOfRows];
+
+        for (int j = 0; j < numOfRows; j++)
+        {
+            tempFloat[j] = matrixList[rowIndex][j] ;
+        }
+
+        return tempFloat;
+    }
+    float[] GetCol(int colIndex)
+    {
+        float[] tempFloat = new float[numOfRows];
+
+        for (int j = 0; j < numOfRows; j++)
+        {
+            tempFloat[j] = matrixList[j][colIndex];
+        }
+
+        return tempFloat;
+    }
+
     void Multiply(List<List<int>> matrixToMultiplyWith)
     {
         List<List<int>> resultMatrix = new List<List<int>>();
@@ -259,7 +282,7 @@ public class ListTypeMatrices : MonoBehaviour
 
 
         ListTypeMatrices listMatrix1 = new ListTypeMatrices(2, 2);
-        ListTypeMatrices listMatrix2 = new ListTypeMatrices(2, 2);
+        ListTypeMatrices listMatrix2 = new ListTypeMatrices(5, 5);
 
         listMatrix1.MakeaMatrixList();
         listMatrix2.MakeaMatrixList();
@@ -272,7 +295,7 @@ public class ListTypeMatrices : MonoBehaviour
         listMatrix1.SetAllElement(3);
         listMatrix2.SetAllElement(2);
 
-       // listMatrix2.SetDiagnol(6);
+        // listMatrix2.SetDiagnol(6);
         //listMatrix2.SetDiagnol(-6);
         //listMatrix2.SetRow(1, 11);
         //Debug.Log(listMatrix2.isDiagnolSame());
@@ -285,8 +308,17 @@ public class ListTypeMatrices : MonoBehaviour
         //Debug.Log(listMatrix1.GetElement(0, 1));
         //listMatrix2.PrintMatrixList();
         //listMatrix1.SubMatrices(listMatrix2.matrixList);
-        listMatrix2.Multiply(listMatrix1.matrixList);
-        listMatrix2.PrintMatrixList();
+        //listMatrix2.Multiply(listMatrix1.matrixList);
+
+        //float[] floatray = listMatrix2.GetRow(1);
+        //for (int i = 0; i < floatray.Length; i++)
+        //{
+        //    string t = "";
+        //    t += floatray[i].ToString();
+        //    Debug.Log(t);
+        //}
+
+        //listMatrix2.PrintMatrixList();
 
     }
 
