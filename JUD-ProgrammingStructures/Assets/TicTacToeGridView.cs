@@ -37,7 +37,7 @@ public class TicTacToeGridView : MonoBehaviour
 
     void CellIntake(CellNonMono cell)
     {
-        Debug.Log("Works");
+       // Debug.Log("Works");
 
 
         Image image = Instantiate(Prefab, transform.position, Prefab.transform.rotation, parentUI);

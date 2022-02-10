@@ -18,7 +18,7 @@ public class TicTacToeGrid : ListTypeMatrices
     }
     public List<List<CellNonMono>> MakeAGridMatrix()
     {
-        Debug.Log("Methos starts");
+      //  Debug.Log("Methos starts");
         matrix = new List<List<CellNonMono>>();
 
         for (int i = 0; i < numOfRows; i++)
@@ -32,7 +32,7 @@ public class TicTacToeGrid : ListTypeMatrices
                 matrix[i].Add(tempCell);
                 cellCreated.Invoke(tempCell);
                 tempCell.statusUpdated += OnInteraction;
-                Debug.Log("Loop works");        
+               // Debug.Log("Loop works");        
                 //tempCell.statusUpdated += OnStatusUpdate;
                 //tempCell. += OnStatusUpdate;
             }
@@ -41,8 +41,14 @@ public class TicTacToeGrid : ListTypeMatrices
     }
     void SyncWithListMatrix(int row, int col)
     {
-
-        base.matrixList[row][col] = (int) matrix[row][col].status;
+        for (int i = 0; i < numOfRows; i++)
+        {
+            for (int j = 0; j < numbOfColoumns; j++)
+            {
+                base.matrixList[i][j] = (int)matrix[i][j].status;
+            }
+        }
+        
     }
     public virtual void OnInteraction(int row, int col, Status status)
     {
@@ -50,12 +56,15 @@ public class TicTacToeGrid : ListTypeMatrices
         SyncWithListMatrix(row, col);
         
         PrintMatrixList();
+        if(matrixList[row][col] != 0)
+        CheckWin(row, col);
     }
-    public void  CheckWin()
+    public void  CheckWin(int row, int col)
     {
-        if (isDiagnolSame() && isInverseDiagnol() && isRowSame() && isColSame())
+        
+        if (isDiagnolSame()  || isRowSame(row) || isColSame(col))
         {
-
+            Debug.Log("You  have won");
         }
     }
     

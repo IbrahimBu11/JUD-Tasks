@@ -233,7 +233,7 @@ public class ListTypeMatrices : MonoBehaviour
         return isSame;
     }
 
-    public bool isRowSame()
+    public bool isRowSame(int num)
     {
         int sameNum = matrixList[0][0];
         
@@ -241,14 +241,10 @@ public class ListTypeMatrices : MonoBehaviour
         bool isSame = false;
         for (int i = 0; i < numOfRows; i++)
         {
-            if (matrixList[i][i] == sameNum)
-            {                
+            if (sameNum == matrixList[num][i])
                 same[i] = true;
-            }
-            else 
-            {
+            else
                 same[i] = false;
-            }            
         }
         for (int i = 0; i < same.Length; i++)
         {
@@ -259,7 +255,7 @@ public class ListTypeMatrices : MonoBehaviour
         }
         return isSame;
     }
-    public bool isColSame()
+    public bool isColSame(int num)
     {
         int sameNum = matrixList[0][0];
 
@@ -267,14 +263,10 @@ public class ListTypeMatrices : MonoBehaviour
         bool isSame = false;
         for (int i = 0; i < numbOfColoumns; i++)
         {
-            if (matrixList[i][i] == sameNum)
-            {
+            if (sameNum == matrixList[i][num])
                 same[i] = true;
-            }
             else
-            {
                 same[i] = false;
-            }
         }
         for (int i = 0; i < same.Length; i++)
         {

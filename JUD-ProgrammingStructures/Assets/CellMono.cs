@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 
 public class CellMono : MonoBehaviour, IPointerDownHandler
 {
+
+    public InputManager input;
+
     
 
     public int row;
@@ -16,17 +19,8 @@ public class CellMono : MonoBehaviour, IPointerDownHandler
     Image image;
     CellNonMono CellNonMono;
 
-    int PlayerCount = 1;
-    bool checkIfPlayerOne()
-    {
-        if (PlayerCount % 2 == 0)
-        {
-            return true;
-            
-        }
-        else 
-            return false;
-    }
+    
+
 
     private void Update()
     {
@@ -42,6 +36,7 @@ public class CellMono : MonoBehaviour, IPointerDownHandler
     void Start()
     {
         image = GetComponent<Image>();
+        input = GameObject.Find("InputManager").GetComponent<InputManager>();
         
     }
     public void SetCell(CellNonMono cell)
@@ -55,14 +50,13 @@ public class CellMono : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-
-        if (CellNonMono.status != Status.Red && CellNonMono.status != Status.Blue)
-        {
-            CellNonMono.Interaction(checkIfPlayerOne());
-            PlayerCount++;
+        
+        if(CellNonMono.status != Status.Red && CellNonMono.status != Status.Blue) 
+        { 
+          CellNonMono.Interaction(input.checkIfPlayerOne());
+          input.ChangeTurn();
         }
 
-        
     }
 
 
