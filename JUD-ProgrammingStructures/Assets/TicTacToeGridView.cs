@@ -14,12 +14,14 @@ public class TicTacToeGridView : MonoBehaviour
    
 
     public Image Prefab;
+    public Image Line;
+
     public Transform parentUI;
     float offsetX = 350f;
-    float offsetY = 250f;
+    float offsetY = 350f;
 
-    public float gridSizeHorizontal = 30.0f;
-    public float gridSizeVertical = 30.0f;
+    public float gridSizeHorizontal = 40.0f;
+    public float gridSizeVertical = 40.0f;
 
     public TicTacToeGrid grid;
 
@@ -51,10 +53,13 @@ public class TicTacToeGridView : MonoBehaviour
         //Inverse positioning since unity is for some reason idk initiating it down to up
 
         Image image = Instantiate(Prefab, transform.position, Prefab.transform.rotation, parentUI);
+        //Image line = Instantiate(Line, transform.position, Line.transform.rotation, parentUI);
+
         image.GetComponent<CellMono>().SetCell(cell);
         float posX = cell.col * gridSizeHorizontal + offsetX;
         float posY = cell.row * -gridSizeVertical + offsetY;
         image.transform.position = new Vector3(posX, posY, 0);
+        //Line.transform.position = new Vector3(posX, posY, 0);
     }
 
 

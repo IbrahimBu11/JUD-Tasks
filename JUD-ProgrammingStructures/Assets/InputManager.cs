@@ -39,17 +39,17 @@ public class InputManager : MonoBehaviour
                 SceneManager.LoadScene(0);
         }
     }
-    void CheckWinOrDraw()
-    {
-        if (grid.grid.isWon)
-        {
-            Win();
-        }
-        else if (grid.grid.isDraw)
-        {
-            Draw();
-        }
-    }
+    //void CheckWinOrDraw()
+    //{
+    //    if (grid.grid.isWon)
+    //    {
+    //        Win();
+    //    }
+    //    else if (grid.grid.isDraw)
+    //    {
+    //        Draw();
+    //    }
+    //}
     public bool checkIfPlayerOne()
     {
         if (PlayerCount % 2 == 0)

@@ -30,6 +30,8 @@ public class CellMono : MonoBehaviour, IPointerDownHandler
         if(CellNonMono.status == Status.Tick)
         {
             image.sprite = tick;
+            
+            
         }
         else if (CellNonMono.status == Status.Cross)
         {
