@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Status {Clickable, Red, Blue};
+public enum Status {Clickable, Tick, Cross};
 
 public class CellNonMono 
 {
@@ -27,9 +27,9 @@ public class CellNonMono
     public void Interaction(bool isPlayerOne)
     {
         if (isPlayerOne)
-            statusUpdated.Invoke(row, col, Status.Red);
+            statusUpdated.Invoke(row, col, Status.Tick);
         else if (!isPlayerOne)
-            statusUpdated.Invoke(row, col, Status.Blue);
+            statusUpdated.Invoke(row, col, Status.Cross);
     }
     void SetStatus(Status status)
     {

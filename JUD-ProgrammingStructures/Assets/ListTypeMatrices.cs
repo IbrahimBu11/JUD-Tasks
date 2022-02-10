@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ListTypeMatrices : MonoBehaviour
+public class ListTypeMatrices 
 {
 
     public TextMeshProUGUI text;

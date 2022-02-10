@@ -5,8 +5,13 @@ using UnityEngine.UI;
 
 public class TicTacToeGridView : MonoBehaviour
 {
+    [Range(1, 10)]
     public int row = 2;
+    [Range(1,10)]
     public int col = 2;
+
+    //InputManager input;
+   
 
     public Image Prefab;
     public Transform parentUI;
@@ -15,7 +20,8 @@ public class TicTacToeGridView : MonoBehaviour
 
     public float gridSizeHorizontal = 30.0f;
     public float gridSizeVertical = 30.0f;
-    TicTacToeGrid grid;
+
+    public TicTacToeGrid grid;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +30,9 @@ public class TicTacToeGridView : MonoBehaviour
         grid.cellCreated += CellIntake;
        // grid.Display();
         grid.MakeAGridMatrix();
+        //input.GameOver += grid.gamover;
+        
+        
            
         //InitializeGridView();
         
@@ -31,7 +40,7 @@ public class TicTacToeGridView : MonoBehaviour
      void Update()
     {
         // if (Input.GetKeyDown(KeyCode.Space))
-        
+       
             
     }
 
@@ -39,44 +48,45 @@ public class TicTacToeGridView : MonoBehaviour
     {
        // Debug.Log("Works");
 
+        //Inverse positioning since unity is for some reason idk initiating it down to up
 
         Image image = Instantiate(Prefab, transform.position, Prefab.transform.rotation, parentUI);
         image.GetComponent<CellMono>().SetCell(cell);
         float posX = cell.col * gridSizeHorizontal + offsetX;
-        float posY = cell.row * gridSizeVertical + offsetY;
+        float posY = cell.row * -gridSizeVertical + offsetY;
         image.transform.position = new Vector3(posX, posY, 0);
     }
 
 
 
-    void InitializeGridView()
-    {
+    //void InitializeGridView()
+    //{
 
-        for (int i = 0; i < grid.numOfRows; i++)
-        {
+    //    for (int i = 0; i < grid.numOfRows; i++)
+    //    {
 
-            for (int j = 0; j < grid.numbOfColoumns; j++)
-            {
-                Image image = Instantiate(Prefab, transform.position, Prefab.transform.rotation, parentUI);
+    //        for (int j = 0; j < grid.numbOfColoumns; j++)
+    //        {
+    //            Image image = Instantiate(Prefab, transform.position, Prefab.transform.rotation, parentUI);
 
-                float posY = j * gridSizeHorizontal + offsetX; //* gridSize) ; // * gridSize;
-                float posX = i * gridSizeVertical + offsetY;//* -gridSize) ; // * gridSize;
+    //            float posY = j * gridSizeHorizontal + offsetX; //* gridSize) ; // * gridSize;
+    //            float posX = i * gridSizeVertical + offsetY;//* -gridSize) ; // * gridSize;
 
-                image.transform.position = new Vector3(posX, posY, 0);
-                //image.transform.position += offset;
+    //            image.transform.position = new Vector3(posX, posY, 0);
+    //            //image.transform.position += offset;
 
-            }
-            //float gridH = grid.numOfRows * gridSize;
-            // float gridV = grid.numbOfColoumns * gridSize;
+    //        }
+    //        //float gridH = grid.numOfRows * gridSize;
+    //        // float gridV = grid.numbOfColoumns * gridSize;
 
-            //parentUI.transform.position = new Vector3(gridH/2 + gridSize/2, gridV/2 - gridSize/2);
+    //        //parentUI.transform.position = new Vector3(gridH/2 + gridSize/2, gridV/2 - gridSize/2);
 
 
-            //offset += new Vector3(Prefab.transform.position.x, verticalSpacing, Prefab.transform.position.z);
-            //offset = new Vector3(initialoffsetx, Prefab.transform.position.y, Prefab.transform.position.z);
+    //        //offset += new Vector3(Prefab.transform.position.x, verticalSpacing, Prefab.transform.position.z);
+    //        //offset = new Vector3(initialoffsetx, Prefab.transform.position.y, Prefab.transform.position.z);
 
-        }
-    }
+    //    }
+    //}
 
 
 

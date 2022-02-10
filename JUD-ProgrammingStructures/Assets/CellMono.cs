@@ -9,6 +9,9 @@ public class CellMono : MonoBehaviour, IPointerDownHandler
 
     public InputManager input;
 
+    public Sprite tick;
+    public Sprite cross;
+
     
 
     public int row;
@@ -24,13 +27,13 @@ public class CellMono : MonoBehaviour, IPointerDownHandler
 
     private void Update()
     {
-        if(CellNonMono.status == Status.Red)
+        if(CellNonMono.status == Status.Tick)
         {
-            image.color = Color.red;
+            image.sprite = tick;
         }
-        else if (CellNonMono.status == Status.Blue)
+        else if (CellNonMono.status == Status.Cross)
         {
-            image.color = Color.blue;
+            image.sprite = cross;
         }
     }
     void Start()
@@ -51,7 +54,7 @@ public class CellMono : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         
-        if(CellNonMono.status != Status.Red && CellNonMono.status != Status.Blue) 
+        if(CellNonMono.status != Status.Tick && CellNonMono.status != Status.Cross && input.IsGameOver != true) 
         { 
           CellNonMono.Interaction(input.checkIfPlayerOne());
           input.ChangeTurn();

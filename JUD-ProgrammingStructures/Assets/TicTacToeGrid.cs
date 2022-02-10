@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void GameOver(bool gameOver);
+public delegate void OnCellCreated(CellNonMono cell);
 public class TicTacToeGrid : ListTypeMatrices
 {
     public List<List<CellNonMono>> matrix;
+    public InputManager input;
 
-    public delegate void OnCellCreated(CellNonMono cell);
-    public OnCellCreated cellCreated;
+
+    public bool isDraw = false;
+    public bool isWon= false;
+    
+    public OnCellCreated cellCreated;    
+    public GameOver gamover;
 
 
 
@@ -41,31 +48,71 @@ public class TicTacToeGrid : ListTypeMatrices
     }
     void SyncWithListMatrix(int row, int col)
     {
-        for (int i = 0; i < numOfRows; i++)
-        {
-            for (int j = 0; j < numbOfColoumns; j++)
-            {
-                base.matrixList[i][j] = (int)matrix[i][j].status;
-            }
-        }
+        //for (int i = 0; i < numOfRows; i++)
+        //{
+            //for (int j = 0; j < numbOfColoumns; j++)
+            //{
+                base.matrixList[row][col] = (int)matrix[row][col].status;
+        //    }
+        //}
         
     }
-    public virtual void OnInteraction(int row, int col, Status status)
+    public  void OnInteraction(int row, int col, Status status)
     {
+       // Debug.Log(input.IsGameOver);
+        //input.SetText();
         this.matrix[row][col].status = status;
         SyncWithListMatrix(row, col);
         
         PrintMatrixList();
-        if(matrixList[row][col] != 0)
-        CheckWin(row, col);
-    }
-    public void  CheckWin(int row, int col)
-    {
-        
-        if (isDiagnolSame()  || isRowSame(row) || isColSame(col))
-        {
-            Debug.Log("You  have won");
+        if (matrixList[row][col] != 0) {
+
+            if (CheckWin(row, col))
+            {
+                Debug.Log("Somebody Won, Cant really tell since i cant fucking communicate with mono script");
+            }
+            else if (CheckDraw())
+            {
+                //isDraw = true;
+                Debug.Log("Its a draw you both suck");
+            }
         }
+
+    }
+    public bool  CheckWin(int row, int col)
+    {
+        bool temp = true;
+        if (isDiagnolSame() || isRowSame(row) || isColSame(col) )//  ||
+        {
+            temp = true;
+        }
+        
+        return temp;
+    }
+    public bool CheckDraw()
+    {
+        bool temp = true;
+        if (CheckIfAllFilled())
+        {
+            temp = false;
+        }
+        return temp;
+    }
+    public bool CheckIfAllFilled()
+    {
+        bool allFilled = false;
+        for (int i = 0; i < numOfRows; i++)
+        {
+            for (int j = 0; j < numbOfColoumns; j++)
+            {
+                if (matrix[i][j].status != Status.Clickable)
+                    allFilled = true;
+                else
+                    allFilled = false;
+                                
+            }
+        }
+        return allFilled;
     }
     
 
