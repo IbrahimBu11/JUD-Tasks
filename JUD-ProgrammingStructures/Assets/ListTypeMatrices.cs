@@ -27,7 +27,7 @@ public class ListTypeMatrices : MonoBehaviour
         MakeaMatrixList();
 
     }
-    public List<List<int>> MakeaMatrixList()
+    virtual public  List<List<int>> MakeaMatrixList()
     {
 
         //matrixList = new List<List<int>>();
@@ -58,11 +58,11 @@ public class ListTypeMatrices : MonoBehaviour
         }
         Debug.Log(yo);
     }
-    void SetElement(int row, int col, int num)
+    public void SetElement(int row, int col, int num)
     {
         matrixList[row][col] = num;
     }
-    void SetAllElement(int num)
+    public void SetAllElement(int num)
     {
         for (int i = 0; i < matrixList.Count; i++)
         {
@@ -75,12 +75,12 @@ public class ListTypeMatrices : MonoBehaviour
 
         }
     }
-    int GetElement(int row, int col)
+    public int GetElement(int row, int col)
     {
         //matrix.GetValue(matrix[row, col]);
         return matrixList[row][col];
     }
-    void SetRow(int rowToSet, int rowToBeSetWith)
+    public void SetRow(int rowToSet, int rowToBeSetWith)
     {
         for (int j = 0; j < numOfRows; j++)
         {
@@ -88,7 +88,7 @@ public class ListTypeMatrices : MonoBehaviour
         }
     }
 
-    void SetCol(int colToSet, int colToBeSetWith)
+    public void SetCol(int colToSet, int colToBeSetWith)
     {
         for (int j = 0; j < numbOfColoumns; j++)
         {
@@ -96,7 +96,7 @@ public class ListTypeMatrices : MonoBehaviour
         }
     }
 
-    void SwapRow(int rowToSwap, int RowToBeSwappedWith)
+    public void SwapRow(int rowToSwap, int RowToBeSwappedWith)
     {
         int[] tempRow = new int[numOfRows];
 
@@ -108,7 +108,7 @@ public class ListTypeMatrices : MonoBehaviour
         }
     }
 
-    void SwapCol(int colToSwap, int colToBeSwappedWith)
+    public void SwapCol(int colToSwap, int colToBeSwappedWith)
     {
         int[] tempCol = new int[numbOfColoumns];
 
@@ -120,7 +120,7 @@ public class ListTypeMatrices : MonoBehaviour
         }
     }
 
-    List<List<int>> AddMatrices(List<List<int>> listToAdd)
+    public List<List<int>> AddMatrices(List<List<int>> listToAdd)
     {
         List<List<int>> tempMatrix = listToAdd;
         for (int i = 0; i < numOfRows; i++)
@@ -134,7 +134,7 @@ public class ListTypeMatrices : MonoBehaviour
         matrixList = tempMatrix;
         return matrixList;
     }
-    List<List<int>> SubMatrices(List<List<int>> listToSub)
+    public List<List<int>> SubMatrices(List<List<int>> listToSub)
     {
         List<List<int>> tempMatrix = listToSub;
         for (int i = 0; i < numOfRows; i++)
@@ -149,7 +149,7 @@ public class ListTypeMatrices : MonoBehaviour
         return matrixList;
     }
 
-    void SetDiagnol(int num)
+    public void SetDiagnol(int num)
     {
         int indexer = 0;
         for (int i = 0; i < numOfRows; i++)
@@ -159,7 +159,7 @@ public class ListTypeMatrices : MonoBehaviour
         }
 
     }
-    void SetInverseDiagnol(int num)
+    public void SetInverseDiagnol(int num)
     {
         Debug.Log(numOfRows);
         int indexer = numOfRows - 1;
@@ -171,7 +171,7 @@ public class ListTypeMatrices : MonoBehaviour
         }
     }
 
-    bool isDiagnolSame()
+    public bool isDiagnolSame()
     {
         int sameNum = matrixList[0][0];
         int indexer = 0;
@@ -202,7 +202,7 @@ public class ListTypeMatrices : MonoBehaviour
 
 
     }
-    bool isInverseDiagnol()
+    public bool isInverseDiagnol()
     {
         int sameNum = matrixList[0][0];
         int indexer = numbOfColoumns;
@@ -233,7 +233,60 @@ public class ListTypeMatrices : MonoBehaviour
         return isSame;
     }
 
-    float[] GetRow(int rowIndex)
+    public bool isRowSame()
+    {
+        int sameNum = matrixList[0][0];
+        
+        bool[] same = new bool[numOfRows];
+        bool isSame = false;
+        for (int i = 0; i < numOfRows; i++)
+        {
+            if (matrixList[i][i] == sameNum)
+            {                
+                same[i] = true;
+            }
+            else 
+            {
+                same[i] = false;
+            }            
+        }
+        for (int i = 0; i < same.Length; i++)
+        {
+            if (same[i] == false)
+                isSame = false;
+            else
+                isSame = true;
+        }
+        return isSame;
+    }
+    public bool isColSame()
+    {
+        int sameNum = matrixList[0][0];
+
+        bool[] same = new bool[numbOfColoumns];
+        bool isSame = false;
+        for (int i = 0; i < numbOfColoumns; i++)
+        {
+            if (matrixList[i][i] == sameNum)
+            {
+                same[i] = true;
+            }
+            else
+            {
+                same[i] = false;
+            }
+        }
+        for (int i = 0; i < same.Length; i++)
+        {
+            if (same[i] == false)
+                isSame = false;
+            else
+                isSame = true;
+        }
+        return isSame;
+    }
+
+    public float[] GetRow(int rowIndex)
     {
         float[] tempFloat = new float[numOfRows];
 
@@ -244,7 +297,7 @@ public class ListTypeMatrices : MonoBehaviour
 
         return tempFloat;
     }
-    float[] GetCol(int colIndex)
+    public float[] GetCol(int colIndex)
     {
         float[] tempFloat = new float[numOfRows];
 
@@ -256,7 +309,7 @@ public class ListTypeMatrices : MonoBehaviour
         return tempFloat;
     }
 
-    void Multiply(List<List<int>> matrixToMultiplyWith)
+    public void Multiply(List<List<int>> matrixToMultiplyWith)
     {
         List<List<int>> resultMatrix = new List<List<int>>();
         for (int i = 0; i < numOfRows; i++)
@@ -281,19 +334,19 @@ public class ListTypeMatrices : MonoBehaviour
     {
 
 
-        ListTypeMatrices listMatrix1 = new ListTypeMatrices(2, 2);
-        ListTypeMatrices listMatrix2 = new ListTypeMatrices(5, 5);
+        //ListTypeMatrices listMatrix1 = new ListTypeMatrices(2, 2);
+        //ListTypeMatrices listMatrix2 = new ListTypeMatrices(5, 5);
 
-        listMatrix1.MakeaMatrixList();
-        listMatrix2.MakeaMatrixList();
+        //listMatrix1.MakeaMatrixList();
+        //listMatrix2.MakeaMatrixList();
 
         //Debug.Log(listMatrix1.matrixList[1].Count.ToString());
        // Debug.Log(matrixList[0].Count);
 
         
 
-        listMatrix1.SetAllElement(3);
-        listMatrix2.SetAllElement(2);
+        //listMatrix1.SetAllElement(3);
+        //listMatrix2.SetAllElement(2);
 
         // listMatrix2.SetDiagnol(6);
         //listMatrix2.SetDiagnol(-6);
