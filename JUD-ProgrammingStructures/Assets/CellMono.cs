@@ -9,6 +9,7 @@ public class CellMono : MonoBehaviour, IPointerDownHandler
 
     public InputManager input;
 
+
     public Sprite tick;
     public Sprite cross;
 
@@ -27,17 +28,21 @@ public class CellMono : MonoBehaviour, IPointerDownHandler
 
     private void Update()
     {
-        if(CellNonMono.status == Status.Tick)
+        if(CellNonMono.status == Status.Tick )
         {
             image.sprite = tick;
             
             
         }
-        else if (CellNonMono.status == Status.Cross)
+        else if (CellNonMono.status == Status.Cross )
         {
             image.sprite = cross;
         }
+
+
+        
     }
+
     void Start()
     {
         image = GetComponent<Image>();
@@ -63,6 +68,5 @@ public class CellMono : MonoBehaviour, IPointerDownHandler
         }
 
     }
-
 
 }
