@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ListTypeMatrices 
+public class ListTypeMatrices
 {
 
     public TextMeshProUGUI text;
@@ -27,7 +27,7 @@ public class ListTypeMatrices
         MakeaMatrixList();
 
     }
-    virtual public  List<List<int>> MakeaMatrixList()
+    virtual public List<List<int>> MakeaMatrixList()
     {
 
         //matrixList = new List<List<int>>();
@@ -173,109 +173,171 @@ public class ListTypeMatrices
 
     public bool isDiagnolSame()
     {
-        int sameNum = matrixList[0][0];
-        int indexer = 0;
-        bool[] same = new bool[numOfRows];
-        bool isSame = false;
-        for (int i = 0; i < numOfRows; i++)
+        HashSet<int> row = new HashSet<int>();
+
+        for (int i = 0; i < matrixList.ToArray().Length; i++)
         {
-            if (matrixList[i][i] == sameNum) {
-                //isSame = true;
-                //sameNum = matrixList[i][indexer];
-                same[i] = true;
-            }
-            else //if (matrixList[i][indexer] != sameNum)
+            if (matrixList[i][i] == 0)
             {
-                same[i] = false;
+                return false;
+                break;
             }
 
-            indexer += 1;
+
+            row.Add(matrixList[i][i]);
         }
-        for (int i = 0; i < same.Length; i++)
-        {
-            if (same[i] == false)
-                isSame = false;
-            else
-                isSame = true;
-        }
-        return isSame;
+        return (row.Count == 1);
+
+
+        //int num = matrixList[0][0];
+        //bool diagnol = false;
+
+        //for (int i = 0; i < numOfRows; i++)
+        //{
+        //    if(matrixList[i][i] == num)
+        //    {
+        //        num = matrixList[i][i];
+        //        diagnol = true;
+        //    }
+        //}
+        //return diagnol;
+        //int sameNum = matrixList[0][0];
+        //int indexer = 0;
+        //bool[] same = new bool[numOfRows];
+        //bool isSame = false;
+        //for (int i = 0; i < numOfRows; i++)
+        //{
+        //    if (matrixList[i][i] == sameNum) {
+        //        //isSame = true;
+        //        //sameNum = matrixList[i][indexer];
+        //        same[i] = true;
+        //    }
+        //    else //if (matrixList[i][indexer] != sameNum)
+        //    {
+        //        same[i] = false;
+        //    }
+
+        //    indexer += 1;
+        //}
+        //for (int i = 0; i < same.Length; i++)
+        //{
+        //    if (same[i] == false)
+        //        isSame = false;
+        //    else
+        //        isSame = true;
+        //}
+        //return isSame;
 
 
     }
     public bool isInverseDiagnol()
     {
-        int sameNum = matrixList[0][0];
-        int indexer = numbOfColoumns;
-        bool[] same = new bool[numbOfColoumns];
-        bool isSame = false;
-        for (int i = 0; i < numbOfColoumns; i++)
-        {
-            if (matrixList[i][indexer] == sameNum)
-            {
-                //isSame = true;
-                //sameNum = matrixList[i][indexer];
-                same[i] = true;
-            }
-            else //if (matrixList[i][indexer] != sameNum)
-            {
-                same[i] = false;
-            }
 
-            indexer -= 1;
-        }
-        for (int i = 0; i < same.Length; i++)
+        HashSet<int> row = new HashSet<int>();
+
+        int k = numOfRows - 1;
+
+        for (int i = 0; i < matrixList.ToArray().Length; i++)
         {
-            if (same[i] == false)
-                isSame = false;
-            else
-                isSame = true;
+            if (matrixList[i][k] == 0)
+            {
+                return false;
+                break;
+            }
+            row.Add(matrixList[i][k--]);
         }
-        return isSame;
-    }
+        return (row.Count == 1);
+
+
+    
+
+    //int sameNum = matrixList[0][0];
+    //int indexer = numbOfColoumns;
+    //bool[] same = new bool[numbOfColoumns];
+    //bool isSame = false;
+    //for (int i = 0; i < numbOfColoumns; i++)
+    //{
+    //    if (matrixList[i][indexer] == sameNum)
+    //    {
+    //        //isSame = true;
+    //        //sameNum = matrixList[i][indexer];
+    //        same[i] = true;
+    //    }
+    //    else //if (matrixList[i][indexer] != sameNum)
+    //    {
+    //        same[i] = false;
+    //    }
+
+    //    indexer -= 1;
+    //}
+    //for (int i = 0; i < same.Length; i++)
+    //{
+    //    if (same[i] == false)
+    //        isSame = false;
+    //    else
+    //        isSame = true;
+    //}
+    //return isSame;
+}
 
     public bool isRowSame(int num)
     {
-        int sameNum = matrixList[0][0];
+        HashSet<int> row = new HashSet<int>();
+
+        for (int i = 0; i < matrixList.ToArray().Length; i++)
+        {
+            row.Add(matrixList[num][i]);
+        }
+        return (row.Count == 1);
+
+        //int sameNum = matrixList[num][0];
         
-        bool[] same = new bool[numOfRows];
-        bool isSame = false;
-        for (int i = 0; i < numOfRows; i++)
-        {
-            if (sameNum == matrixList[num][i])
-                same[i] = true;
-            else
-                same[i] = false;
-        }
-        for (int i = 0; i < same.Length; i++)
-        {
-            if (same[i] == false)
-                isSame = false;
-            else
-                isSame = true;
-        }
-        return isSame;
+        //bool[] same = new bool[numOfRows];
+        //bool isSame = false;
+        //for (int i = 0; i < numOfRows; i++)
+        //{
+        //    if (sameNum == matrixList[num][i])
+        //        same[i] = true;
+        //    else
+        //        same[i] = false;
+        //}
+        //for (int i = 0; i < same.Length; i++)
+        //{
+        //    if (same[i] == false)
+        //        isSame = false;
+        //    else
+        //        isSame = true;
+        //}
+        //return isSame;
     }
     public bool isColSame(int num)
     {
-        int sameNum = matrixList[0][0];
+        HashSet<int> row = new HashSet<int>();
 
-        bool[] same = new bool[numbOfColoumns];
-        bool isSame = false;
-        for (int i = 0; i < numbOfColoumns; i++)
+        for (int i = 0; i < matrixList[1].ToArray().Length; i++)
         {
-            if (sameNum == matrixList[i][num])
-                same[i] = true;
-            else
-                same[i] = false;
+            row.Add(matrixList[i][num]);
         }
-        for (int i = 0; i < same.Length; i++)
-        {
-            if (same[i] == false)
-                isSame = false;
-            else
-                isSame = true;
-        }
-        return isSame;
+        return (row.Count == 1);
+        //int sameNum = matrixList[0][num];
+
+        //bool[] same = new bool[numbOfColoumns];
+        //bool isSame = false;
+        //for (int i = 0; i < numbOfColoumns; i++)
+        //{
+        //    if (sameNum == matrixList[i][num])
+        //        same[i] = true;
+        //    else
+        //        same[i] = false;
+        //}
+        //for (int i = 0; i < same.Length; i++)
+        //{
+        //    if (same[i] == false)
+        //        isSame = false;
+        //    else
+        //        isSame = true;
+        //}
+        //return isSame;
     }
 
     public float[] GetRow(int rowIndex)

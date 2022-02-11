@@ -54,10 +54,10 @@ public class InputManager : MonoBehaviour
     {
         if (PlayerCount % 2 == 0)
         {
-            return true;
+            return false;
         }
         else
-            return false;
+            return true;
     }
     public void SetText()
     {

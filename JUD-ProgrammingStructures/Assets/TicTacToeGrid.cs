@@ -65,9 +65,9 @@ public class TicTacToeGrid : ListTypeMatrices
         SyncWithListMatrix(row, col);
         
         PrintMatrixList();
-        if (matrixList[row][col] != 0) 
+        if (matrix[row][col].status != Status.Clickable) 
         {
-            Debug.Log("Working for no reason");
+           // Debug.Log("Working for no reason");
             if (CheckWin(row, col))
             {
                 Debug.Log("Somebody Won, Cant really tell since i cant fucking communicate with mono script");
@@ -82,10 +82,15 @@ public class TicTacToeGrid : ListTypeMatrices
     }
     public bool  CheckWin(int row, int col)
     {
-        bool temp = true;
-        if (isDiagnolSame() || isRowSame(row) || isColSame(col))//  ||
+        bool temp = false;
+        //
+        if (isDiagnolSame() || isRowSame(row) || isColSame(col) || isInverseDiagnol())//  ||
         {
             temp = true;
+            Debug.Log("Diagnol : " + isDiagnolSame());
+            Debug.Log("InverseDiagnol : " + isInverseDiagnol());
+            Debug.Log("Row : " + isRowSame(row));
+            Debug.Log("Col: " + isColSame(col));
         }
         else
             temp = false;
@@ -94,13 +99,14 @@ public class TicTacToeGrid : ListTypeMatrices
     }
     public bool CheckDraw()
     {
-        bool temp = true;
+        bool temp = false;
         if (CheckIfAllFilled())
         {
-            temp = false;
+            temp = true;
         }
         else
             temp = false;
+
         return temp;
     }
     public bool CheckIfAllFilled()
