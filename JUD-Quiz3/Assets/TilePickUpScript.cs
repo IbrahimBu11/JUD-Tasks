@@ -19,7 +19,7 @@ public class TilePickUpScript : MonoBehaviour
         initialPos = transform.position;    
     }
 
-
+    //Pick up tile and assign it to the player tha6t has picked the tile
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy"))//|| collision.gameObject.CompareTag("Enemy"))

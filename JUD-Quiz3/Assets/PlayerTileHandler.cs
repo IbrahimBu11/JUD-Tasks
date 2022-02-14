@@ -14,6 +14,8 @@ public class PlayerTileHandler : MonoBehaviour
     {
         tiles = new List<GameObject>();
     }
+
+    //Add tiles in the and populate gameobjectrs on top of the player
     public void AddTile(GameObject tile)
     {
 
@@ -27,6 +29,8 @@ public class PlayerTileHandler : MonoBehaviour
             posYOffset += 0.4f;
         }
     }
+
+    //Collision and for soome reaso its not working
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -54,6 +58,8 @@ public class PlayerTileHandler : MonoBehaviour
     {
         //Debug.Log(tiles.Count);    
     }
+
+    //resets the list to a new list and destroys the game object childs
     public void Reset()
     {
         tiles = new List<GameObject>();

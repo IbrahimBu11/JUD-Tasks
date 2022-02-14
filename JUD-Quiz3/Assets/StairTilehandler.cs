@@ -24,6 +24,8 @@ public class StairTilehandler : MonoBehaviour
 
     private void Start()
     {
+        //Build a number of stairs on the stairCase
+
         for (int i = 0; i < 11; i++)
         {
             GameObject tileClone = Instantiate(clone, new Vector3(head.position.x, head.position.y + posYOffset, head.position.z), clone.transform.rotation);

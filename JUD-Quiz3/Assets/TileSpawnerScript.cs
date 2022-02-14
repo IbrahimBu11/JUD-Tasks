@@ -29,6 +29,8 @@ public class TileSpawnerScript : MonoBehaviour
         Debug.Log(rowLength + "  " + columnLength);
         SpawnTileLoop();
     }
+
+    //Spawn after some time of collectoon
     IEnumerator WaitandRespawn(GameObject tile)
     {
         yield return new WaitForSeconds(2f);
@@ -36,6 +38,7 @@ public class TileSpawnerScript : MonoBehaviour
 
     }
 
+    //Spawn Tiles 
     void SpawnTileLoop()
     {
 
