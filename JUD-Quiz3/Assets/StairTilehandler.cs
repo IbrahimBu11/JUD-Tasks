@@ -102,9 +102,16 @@ public class StairTilehandler : MonoBehaviour
     //Populate the required number with color of the superior tile color population count
     void Populate(Color color, int count)
     {
-
+        if(count > stairTile.Count)
+        {
+            count = stairTile.Count;
+        }
         for (int i = 0; i < count; i++)
         {
+            if(stairTile[i].GetComponent<MeshRenderer>().material.color == color && count <= stairTile.Count)
+            {
+                count += 1;
+            }
             stairTile[i].GetComponent<MeshRenderer>().material.color = color;
         }
     }
