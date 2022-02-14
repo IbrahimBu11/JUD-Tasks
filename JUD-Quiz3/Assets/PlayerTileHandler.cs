@@ -27,6 +27,29 @@ public class PlayerTileHandler : MonoBehaviour
             posYOffset += 0.4f;
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            if (collision.gameObject.GetComponent<PlayerTileHandler>().tiles.Count > tiles.Count)
+            {
+                collision.gameObject.GetComponent<PlayerTileHandler>().Reset();
+            }
+        }
+        Debug.Log("works");
+    }
+
+    void ControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.CompareTag("Enemy"))
+        {
+            if (hit.gameObject.GetComponent<PlayerTileHandler>().tiles.Count > tiles.Count)
+            {
+                hit.gameObject.GetComponent<PlayerTileHandler>().Reset();
+            }
+        }
+        Debug.Log("works");
+    }
     void Update()
     {
         //Debug.Log(tiles.Count);    
@@ -34,5 +57,13 @@ public class PlayerTileHandler : MonoBehaviour
     public void Reset()
     {
         tiles = new List<GameObject>();
+        int childs = transform.childCount;
+        foreach(Transform child in transform)
+        {
+            if(child.name != "Head")
+            {
+                Destroy(child.gameObject);
+            }
+        }
     }
 }

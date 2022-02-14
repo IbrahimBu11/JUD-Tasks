@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
         Move(move);      
     }
 
+
     //Move the character in the dirction of the move Vector based on Input
     void Move(Vector3 move)
     {

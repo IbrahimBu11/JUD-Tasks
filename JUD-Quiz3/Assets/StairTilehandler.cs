@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class StairTilehandler : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class StairTilehandler : MonoBehaviour
     
     private List<GameObject> stairTile = new List<GameObject>();
     List<GameObject> tiles;
+
+    public TextMeshProUGUI text;
 
 
     public GameObject clone;
@@ -28,6 +31,21 @@ public class StairTilehandler : MonoBehaviour
             posYOffset += 0.4f;
         }
         
+    }
+
+    //Check Win and declate winner when the count approaches to 10 for any player
+    void CheckWin()
+    {
+        if(redCount > 10)
+        {
+            Debug.Log("Red Player Wins");
+            text.SetText("Red Player Wins");
+        }
+        else if(blueCount > 10)
+        {
+            Debug.Log("Blue Player Wins");
+            text.SetText("Blue Player Wins");
+        }
     }
     public void AddTile()
     {
@@ -63,6 +81,8 @@ public class StairTilehandler : MonoBehaviour
 
        //     }
     }
+
+    //Subtract the larger numb and add it to stairs
     void Balance()
     {
         if(redCount > blueCount)
@@ -77,9 +97,12 @@ public class StairTilehandler : MonoBehaviour
             Populate(Color.blue, blueCount);
             Debug.Log("blue works");
         }
+        CheckWin();
     }
+    //Populate the required number with color of the superior tile color population count
     void Populate(Color color, int count)
     {
+
         for (int i = 0; i < count; i++)
         {
             stairTile[i].GetComponent<MeshRenderer>().material.color = color;
@@ -92,6 +115,7 @@ public class StairTilehandler : MonoBehaviour
             Debug.Log("stsart");
             redCount = other.gameObject.GetComponent<PlayerTileHandler>().tiles.Count;
             Balance();
+            other.gameObject.GetComponent<PlayerTileHandler>().Reset();
             Debug.Log("Red Trigger Works");
             
         }
@@ -99,6 +123,7 @@ public class StairTilehandler : MonoBehaviour
         {
             blueCount = other.gameObject.GetComponent<PlayerTileHandler>().tiles.Count;
             Balance();
+            other.gameObject.GetComponent<PlayerTileHandler>().Reset();
             Debug.Log("blue Trigger Works");
         }
     }

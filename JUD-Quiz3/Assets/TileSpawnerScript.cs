@@ -16,7 +16,7 @@ public class TileSpawnerScript : MonoBehaviour
     private int rowGap = 8;
     private int columnGap = 9;
 
-    List<List<GameObject>> tiles;
+    public List<List<GameObject>> tiles;
 
     void Start()
     {
@@ -50,6 +50,7 @@ public class TileSpawnerScript : MonoBehaviour
             }
         }
     }
+
     void SpawnTiles(GameObject tile, int row, int column)
     {
         GameObject tileClone = Instantiate(tile, tile.transform.position, tile.transform.rotation);
