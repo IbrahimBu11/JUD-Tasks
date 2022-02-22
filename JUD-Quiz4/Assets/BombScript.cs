@@ -36,10 +36,10 @@ public class BombScript : MonoBehaviour
     {
         yield return new WaitForSeconds(countdown);
         Explode();
-        CastingRay(Vector3.up, explosionRadius);
-        CastingRay(Vector3.down, explosionRadius);
-        CastingRay(Vector3.right, explosionRadius);
-        CastingRay(Vector3.left, explosionRadius);
+        //CastingRay(Vector3.up, explosionRadius);
+        //CastingRay(Vector3.down, explosionRadius);
+        //CastingRay(Vector3.right, explosionRadius);
+        //CastingRay(Vector3.left, explosionRadius);
         Destroy(gameObject);
     }
     void Explode()
