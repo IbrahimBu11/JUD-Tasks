@@ -22,18 +22,22 @@ public class TilemapManager : MonoBehaviour
 		bool up = true, down = true, right = true, left = true;
 		for(int i = 0; i <= explosionRadius; i++)
         {
+			if(right)
 			if(!ExplodeCell(originCell + new Vector3Int(i, 0, 0)) && right)
             {
 				right = false;
             }
+			if(up)
 			if(!ExplodeCell(originCell + new Vector3Int(0, i, 0)) && up)
             {
 				up = false;
             }
+			if(left)
 			if(!ExplodeCell(originCell + new Vector3Int(-i, 0, 0)) && left)
             {
 				left = false;
             }
+			if(down)
 			if(!ExplodeCell(originCell + new Vector3Int(0, -i, 0)) && down)
             {
 				down = false;
@@ -50,13 +54,14 @@ public class TilemapManager : MonoBehaviour
 		if (tile == NotDestructable)
 		{
 			return false;
+			
 		}
 
 		if (tile == destructibleTile)
 		{
 			tilemap.SetTile(cell, null);
 		}
-
+		
 		Vector3 pos = tilemap.GetCellCenterWorld(cell);
 		Destroy(Instantiate(explosionPrefab, pos, Quaternion.identity), 0.33f);
 

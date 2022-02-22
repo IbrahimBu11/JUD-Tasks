@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b0b82a04439764083b0bfd0777a19e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionRadius: 1
   countdown: 3
   tilemap: {fileID: 0}
   tile: {fileID: 0}
