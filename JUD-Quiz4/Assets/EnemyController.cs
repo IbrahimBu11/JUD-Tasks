@@ -10,18 +10,24 @@ public class EnemyController : MonoBehaviour
     public List<Vector3> availablePlaces;
 
 
-    private Vector2 destination;
-    private bool isMoving;
+    public int range = 2;
+    public bool changingDir;
+    private Vector3[] directions = new Vector3[] { Vector3.up, Vector3.down, Vector3.right, Vector3.left };
+    private Vector3 direction;
 
+    int layerMask;
     //public TileBase[] allTiles;
     // Start is called before the first frame update
     void Start()
     {
+        layerMask = ~(LayerMask.GetMask("walls"));
+        direction = directions[Random.Range(0, directions.Length)];
         //GetAllAvailableSpaces();
-        foreach(Vector3 places in availablePlaces)
+        foreach (Vector3 places in availablePlaces)
         {
             Debug.Log(places);
         }
+ 
         //BoundsInt size = navigateable.cellBounds;
         //allTiles = navigateable.GetTilesBlock(size);
         //for (int x = 0; x < size.size.x; x++)
@@ -67,15 +73,15 @@ public class EnemyController : MonoBehaviour
     //    //return isTrue;
     //}
    
-    void MoveRandom()
-    {
-        Vector3Int cell = navigateable.WorldToCell(transform.position );
-        Vector3 cellCenterPos = navigateable.GetCellCenterWorld(cell);
-        Vector2 cell2d = new Vector2(cellCenterPos.x, cellCenterPos.y) + new Vector2(1, 0);
-        if(Vector2.Distance(transform.position, cell2d) > 1f)
-        transform.Translate(cell2d * Time.deltaTime);
-    }
-    // Update is called once per frame
+    //void MoveRandom()
+    //{
+    //    Vector3Int cell = navigateable.WorldToCell(transform.position );
+    //    Vector3 cellCenterPos = navigateable.GetCellCenterWorld(cell);
+    //    Vector2 cell2d = new Vector2(cellCenterPos.x, cellCenterPos.y) + new Vector2(1, 0);
+    //    if(Vector2.Distance(transform.position, cell2d) > 1f)
+    //    transform.Translate(cell2d * Time.deltaTime);
+    //}
+    //// Update is called once per frame
     void Update()
     {
         // MoveRandom();
@@ -90,7 +96,41 @@ public class EnemyController : MonoBehaviour
         //    transform.Translate(destination * Time.deltaTime);
 
         //}
-        AlignToCenter();
+        //AlignToCenter();
+        Move();
+    }
+    void Move() {
+        
+        transform.Translate(direction * Time.deltaTime);
+        CastingRay(direction, range);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemies"))
+        {
+            ChangeDirection();
+        }
+    }
+    void CastingRay(Vector3 direction, float range)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, range, layerMask);
+       // Debug.DrawRay(transform.position, direction, Color.blue, 2f);
+        if (hit)
+        {
+           // Debug.Log(hit.collider.name);
+            if (hit.collider.CompareTag("NotPassable") && !changingDir)
+            {
+                ChangeDirection();
+                changingDir = true;
+                StartCoroutine("waitForTime", 2);
+            }
+        }
+    }
+    IEnumerator waitForTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        changingDir = false;
+
     }
     void AlignToCenter()
     {
@@ -99,13 +139,22 @@ public class EnemyController : MonoBehaviour
         Vector3 cellCenterPos = navigateable.GetCellCenterWorld(cell);       
         transform.position = cellCenterPos;
     }
-    Vector2 PickRandomTile()
+    
+    
+    void ChangeDirection()
     {
-        isMoving = true;
-        int random = Random.Range(0, availablePlaces.Count);
-        Vector2 pos = new Vector2(availablePlaces[random].x, availablePlaces[random].y);
-        return pos;
+        direction = -direction;
+
+        //Debug.Log(direction);
+            
+    }
+    //Vector2 PickRandomTile()
+    //{
+    //    isMoving = true;
+    //    int random = Random.Range(0, availablePlaces.Count);
+    //    Vector2 pos = new Vector2(availablePlaces[random].x, availablePlaces[random].y);
+    //    return pos;
         
 
-    }
+    //}
 }
