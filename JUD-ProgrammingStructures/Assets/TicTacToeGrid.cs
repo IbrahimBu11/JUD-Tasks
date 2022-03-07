@@ -46,22 +46,24 @@ public class TicTacToeGrid : ListTypeMatrices
         }
         return matrix;
     }
-    void SyncWithListMatrix(int row, int col)
-    {
+    void SyncWithListMatrix(int row, int col) { 
         //for (int i = 0; i < numOfRows; i++)
         //{
             //for (int j = 0; j < numbOfColoumns; j++)
             //{
-                base.matrixList[row][col] = (int)matrix[row][col].status;
+        base.matrixList[row][col] = (int)matrix[row][col].status;
+        
         //    }
         //}
-        
+
     }
     public  void OnInteraction(int row, int col, Status status)
     {
-       // Debug.Log(input.IsGameOver);
+        // Debug.Log(input.IsGameOver);
         //input.SetText();
+
         this.matrix[row][col].status = status;
+
         SyncWithListMatrix(row, col);
         
         PrintMatrixList();
@@ -132,6 +134,8 @@ public class TicTacToeGrid : ListTypeMatrices
      {
        // MakeAMatrixInGrid();
         Debug.Log(matrix.ToString());
+
+        
      }
 
 
