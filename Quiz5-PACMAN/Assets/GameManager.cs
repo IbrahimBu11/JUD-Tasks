@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
 
     public ControlMatrix control;
 
+    public GameObject player;
 
+    public List<GameObject> matrix;
 
     public GameObject cellMono;
 
@@ -30,15 +32,31 @@ public class GameManager : MonoBehaviour
         //control.sync();
 
         control.PrintMatrixList();
+       // player.GetComponent<PlayerController>().posChange += OnUpdate;
     }
+    void OnUpdate(int row, int col, Statusses status)
+    {
+        control.matrix[row][col].status = Statusses.Wall;
+        control.sync();
+        control.PrintMatrixList();
+
+    }
+
 
     void CellIntake(CellNonMono cell)
     {
-        GameObject cellMonoClone = Instantiate(cellMono, transform.position, cellMono.transform.rotation);        
+        GameObject cellMonoClone = Instantiate(cellMono, transform.position, cellMono.transform.rotation);
 
-        cellMonoClone.GetComponent<monoCell>().SetCell(cell);
+        Component cells = cell;
+            
+        //cellMonoClone.AddComponent<cell>();
+        cellMonoClone.GetComponent<CellNonMono>().status = cell.status;
         float posX = cell.row *  gap;
         float posY = cell.col * -gap;
-        cellMonoClone.transform.position = new Vector3(posX, posY, 0);    
+        cellMonoClone.transform.position = new Vector3(posX, posY, 0);
+
+        matrix.Add(cellMonoClone);
     }
+
+    
 }

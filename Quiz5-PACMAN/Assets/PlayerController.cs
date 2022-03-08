@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public delegate void OnPositionChange(int row, int col);
+//public delegate void OnPositionChange(int row, int col, Status status);
 public class PlayerController : MonoBehaviour
 {
     public int row;
     public int col;
 
+    public Transform forward;
 
+    public GameObject Manager;
+
+    //public OnPositionChange posChange;
 
     private bool isMoving = false;
     private Vector3 originalPos, targetPos;
@@ -17,10 +21,15 @@ public class PlayerController : MonoBehaviour
 
     private bool canUp = true, canRight= true, canDown=true, canLeft= true;
 
-    GameManager game;
+   
 
     private void Update()
     {
+        if (rayCast())
+        {
+            rayCastInvoke(Vector3.forward).collider.GetComponent<monoCellSimple>().SetCell(Status.wall);             
+        }
+
         if (rayCast(Vector3.up))
             canUp = true;
         else
@@ -50,7 +59,19 @@ public class PlayerController : MonoBehaviour
         
     }
 
-
+    public RaycastHit rayCastInvoke(Vector3 direction)
+    {
+        RaycastHit hit;
+        
+       
+        if (Physics.Raycast(forward.position, transform.TransformDirection(direction), out hit, Mathf.Infinity))
+        {
+            
+            return hit;
+        }
+        else
+            return hit;
+    }
     public bool rayCast(Vector3 direction)
     {
         RaycastHit hit;
@@ -62,6 +83,17 @@ public class PlayerController : MonoBehaviour
             
             Debug.Log(hit.collider.name);
 
+            return true;
+        }
+        else
+            return false;
+    }
+    public bool rayCast()
+    {
+        RaycastHit hit;
+        
+        if (Physics.Raycast(forward.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        {
             return true;
         }
         else

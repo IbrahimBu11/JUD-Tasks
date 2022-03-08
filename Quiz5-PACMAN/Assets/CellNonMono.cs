@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Status { Wall, empty};
+public enum Statusses { Wall, empty};
 
-public class CellNonMono
+public class CellNonMono : MonoBehaviour
 {
 
 
-    public delegate void StatusUpdated(int row, int col, Status status);
+    public delegate void StatusUpdated(int row, int col, Statusses status);
     public StatusUpdated statusUpdated;
 
 
-    public Status status = Status.empty;
+    public Statusses status = Statusses.empty;
 
     public int row;
     public int col;
@@ -21,14 +21,15 @@ public class CellNonMono
     {
         this.row = row;
         this.col = col;
-        this.status = Status.empty;
+        this.status = Statusses.empty;
     }
+     
 
-    void SetStatus(Status status)
+    public void SetStatus(Statusses status)
     {
         this.status = status;
     }
-    Status GetStatus(Status status)
+    Statusses GetStatus(Statusses status)
     {
         return status;
     }

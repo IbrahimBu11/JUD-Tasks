@@ -32,26 +32,26 @@ public class ControlMatrix : ListTypeMatrices
 
                 matrix[i].Add(tempCell);
                 cellCreated.Invoke(tempCell);
-               // tempCell.statusUpdated += OnInteraction;
-                // Debug.Log("Loop works");        
-                //tempCell.statusUpdated += OnStatusUpdate;
-                //tempCell. += OnStatusUpdate;
+                
+                
+
             }
         }
 
         //Make a Border in control
 
-        SetRowControl(0, Status.Wall);
-        SetRowControl(numOfRows - 1, Status.Wall);
-        SetColControl(0, Status.Wall);
-        SetColControl(numbOfColoumns - 1, Status.Wall);
+        SetRowControl(0, Statusses.Wall);
+        SetRowControl(numOfRows - 1, Statusses.Wall);
+        SetColControl(0, Statusses.Wall);
+        SetColControl(numbOfColoumns - 1, Statusses.Wall);
 
         sync();
 
         Debug.Log("Works");
         return matrix;
     }
-    public void SetRowControl(int rowToSet, Status status)
+
+    public void SetRowControl(int rowToSet, Statusses status)
     {
         for (int j = 0; j < numbOfColoumns; j++)
         {
@@ -59,7 +59,7 @@ public class ControlMatrix : ListTypeMatrices
         }
     }
 
-    public void SetColControl(int colToSet, Status status)
+    public void SetColControl(int colToSet, Statusses status)
     {
         for (int j = 0; j < numOfRows; j++)
         {
@@ -76,9 +76,10 @@ public class ControlMatrix : ListTypeMatrices
             }
         }
     }
-    public void OnInteraction(int row, int col, Status status)
+    public void OnInteraction(int row, int col, Statusses status)
     {
-
+        matrix[row][col].status = status;
+        sync();
     }
 
 }

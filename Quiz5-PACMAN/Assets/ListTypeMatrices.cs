@@ -71,8 +71,6 @@ public class ListTypeMatrices
 
                 matrixList[i][j] = num;
             }
-
-
         }
     }
     public int GetElement(int row, int col)
